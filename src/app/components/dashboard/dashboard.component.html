@@ -1,16 +1,4 @@
-<!-- <div class="dashboard">
-    <h1>Eligibility Checker</h1>
-    <form (ngSubmit)="checkEligibility()">
-      <label for="name">Enter Name:</label>
-      <input type="text" id="name" [(ngModel)]="name" name="name" required />
-      <button type="submit">Check Eligibility</button>
-    </form>
-    <div *ngIf="eligibilityStatus" class="result">
-      <h2>Result: {{ eligibilityStatus }}</h2>
-    </div>
-  </div> -->
-  
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -18,6 +6,13 @@
   <title>Eligibility Checker</title>
   <style>
     /* CSS to center the .dashboard */
+    .dashboard {
+      text-align: center;
+      padding: 20px;
+    }
+    .result {
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -26,10 +21,39 @@
     <form (ngSubmit)="checkEligibility()">
       <label for="name">Enter Name:</label>
       <input type="text" id="name" [(ngModel)]="name" name="name" required />
+      
+      <label for="creditScore">Credit Score:</label>
+      <input type="number" id="creditScore" [(ngModel)]="creditScore" name="creditScore" required />
+
+      <label for="yearlyIncome">Yearly Income:</label>
+      <input type="number" id="yearlyIncome" [(ngModel)]="yearlyIncome" name="yearlyIncome" required />
+
+      <label for="totalDebt">Total Debt:</label>
+      <input type="number" id="totalDebt" [(ngModel)]="totalDebt" name="totalDebt" required />
+
+      <label for="employmentStatus">Employment Status:</label>
+      <select id="employmentStatus" [(ngModel)]="employmentStatus" name="employmentStatus" required>
+        <option value="Employed">Employed</option>
+        <option value="Unemployed">Unemployed</option>
+      </select>
+
       <button type="submit">Check Eligibility</button>
     </form>
+
     <div *ngIf="eligibilityStatus" class="result">
-      <h2>Result: {{ eligibilityStatus }}</h2>
+      <h2>Eligibility Status: {{ eligibilityStatus }}</h2>
+      <p>{{ message }}</p>
+      <div *ngIf="rejectionReasons.length > 0">
+        <h4>Reasons for Rejection:</h4>
+        <ul>
+          <li *ngFor="let reason of rejectionReasons">{{ reason }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Loan Calculator Result -->
+    <div *ngIf="loanAmount > 0" class="result">
+      <h3>Maximum Loan Amount: ${{ loanAmount }}</h3>
     </div>
   </div>
 </body>
