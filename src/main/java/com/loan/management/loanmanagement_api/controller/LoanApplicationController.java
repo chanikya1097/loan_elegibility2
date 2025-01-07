@@ -13,8 +13,11 @@ import com.loan.management.service.LoanApplicationService;
 
 @RestController
 @RequestMapping("/loan-application")
-//@CrossOrigin(origins = { "http://localhost:4200", "https://63a5-47-184-104-147.ngrok-free.app","https://empty-cows-slide.loca.lt" })
-@CrossOrigin(origins = "*")
+/*
+ * @CrossOrigin(origins = { "http://localhost:4200",
+ * "https://aea2-47-184-104-147.ngrok-free.app"})
+ */
+ @CrossOrigin(origins = "*") 
 public class LoanApplicationController {
 
 	private final LoanApplicationService loanApplicationService;
