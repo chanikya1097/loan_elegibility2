@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eligibility Checker</title>
   <style>
-    /* CSS to center the .dashboard */
     .dashboard {
       text-align: center;
       padding: 20px;
@@ -13,27 +12,66 @@
     .result {
       margin-top: 20px;
     }
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
   </style>
 </head>
 <body>
   <div class="dashboard">
     <h1>Eligibility Checker</h1>
     <form (ngSubmit)="checkEligibility()">
+      <!-- Name Input -->
       <label for="name">Enter Name:</label>
-      <input type="text" id="name" [(ngModel)]="name" name="name" required />
-      
+      <input
+        type="text"
+        id="name"
+        [(ngModel)]="name"
+        name="name"
+        required
+        (keypress)="blockSpecialCharactersAndNumbers($event)"
+      />
+
+      <!-- Credit Score Input -->
       <label for="creditScore">Credit Score:</label>
-      <input type="number" id="creditScore" [(ngModel)]="creditScore" name="creditScore" required />
+      <input
+        type="text"
+        id="creditScore"
+        [(ngModel)]="creditScore"
+        name="creditScore"
+        required
+        maxlength="3"
+        (input)="limitCreditScore($event)"
+      />
 
+      <!-- Yearly Income Input -->
       <label for="yearlyIncome">Yearly Income:</label>
-      <input type="number" id="yearlyIncome" [(ngModel)]="yearlyIncome" name="yearlyIncome" required />
+      <input
+        type="text"
+        id="yearlyIncome"
+        [(ngModel)]="yearlyIncome"
+        name="yearlyIncome"
+        required
+        (input)="limitToSixFigures($event)"
+      />
 
+      <!-- Total Debt Input -->
       <label for="totalDebt">Total Debt:</label>
-      <input type="number" id="totalDebt" [(ngModel)]="totalDebt" name="totalDebt" required />
+      <input
+        type="text"
+        id="totalDebt"
+        [(ngModel)]="totalDebt"
+        name="totalDebt"
+        required
+        (input)="limitToSixFigures($event)"
+      />
 
+      <!-- Employment Status -->
       <label for="employmentStatus">Employment Status:</label>
       <select id="employmentStatus" [(ngModel)]="employmentStatus" name="employmentStatus" required>
         <option value="Employed">Employed</option>
+        <option value="Self Employed">Self Employed</option>
         <option value="Unemployed">Unemployed</option>
       </select>
 
@@ -51,7 +89,6 @@
       </div>
     </div>
 
-    <!-- Loan Calculator Result -->
     <div *ngIf="loanAmount > 0" class="result">
       <h3>Maximum Loan Amount: ${{ loanAmount }}</h3>
     </div>

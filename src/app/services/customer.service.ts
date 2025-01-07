@@ -7,8 +7,11 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class CustomerService {
-  private apiUrl = 'https://wide-dryers-knock.loca.lt/loan-application/check-eligibility'; // Backend API for eligibility
-  private loanCalculatorUrl = 'https://wide-dryers-knock.loca.lt/loan-application/loan-calculator'; // Backend API for loan calculator
+  // private apiUrl = 'http://localhost:8080/loan-application/check-eligibility'; 
+  // private loanCalculatorUrl = 'http://localhost:8080/loan-application/loan-calculator';
+  private apiUrl = 'https://3921-47-184-104-147.ngrok-free.app/api/loan-application/check-eligibility';
+private loanCalculatorUrl = 'https://3921-47-184-104-147.ngrok-free.app/api/loan-application/loan-calculator';
+
 
   constructor(private http: HttpClient) {}
 
